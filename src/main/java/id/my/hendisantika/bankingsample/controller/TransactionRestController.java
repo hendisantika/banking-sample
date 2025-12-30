@@ -4,6 +4,7 @@ import id.my.hendisantika.bankingsample.constants.ACTION;
 import id.my.hendisantika.bankingsample.model.Account;
 import id.my.hendisantika.bankingsample.service.AccountService;
 import id.my.hendisantika.bankingsample.service.TransactionService;
+import id.my.hendisantika.bankingsample.util.DepositInput;
 import id.my.hendisantika.bankingsample.util.InputValidator;
 import id.my.hendisantika.bankingsample.util.TransactionInput;
 import id.my.hendisantika.bankingsample.util.WithdrawInput;
@@ -82,4 +83,27 @@ public class TransactionRestController {
         }
     }
 
+    @PostMapping(value = "/deposit",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deposit(
+            @Valid @RequestBody DepositInput depositInput) {
+        log.debug("Triggered AccountRestController.depositInput");
+
+        // Validate input
+        if (InputValidator.isAccountNoValid(depositInput.getTargetAccountNo())) {
+            // Attempt to retrieve the account information
+            Account account = accountService.getAccount(depositInput.getTargetAccountNo());
+
+            // Return the account details, or warn that no account was found for given input
+            if (account == null) {
+                return new ResponseEntity<>(NO_ACCOUNT_FOUND, HttpStatus.OK);
+            } else {
+                transactionService.updateAccountBalance(account, depositInput.getAmount(), ACTION.DEPOSIT);
+                return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+            }
+        } else {
+            return new ResponseEntity<>(INVALID_SEARCH_CRITERIA, HttpStatus.BAD_REQUEST);
+        }
+    }
 }
