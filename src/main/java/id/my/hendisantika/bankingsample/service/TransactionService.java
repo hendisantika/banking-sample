@@ -5,6 +5,7 @@ import id.my.hendisantika.bankingsample.model.Account;
 import id.my.hendisantika.bankingsample.model.Transaction;
 import id.my.hendisantika.bankingsample.repository.AccountRepository;
 import id.my.hendisantika.bankingsample.repository.TransactionRepository;
+import id.my.hendisantika.bankingsample.util.TransactionInput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

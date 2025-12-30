@@ -3,6 +3,7 @@ package id.my.hendisantika.bankingsample.service;
 import id.my.hendisantika.bankingsample.model.Account;
 import id.my.hendisantika.bankingsample.repository.AccountRepository;
 import id.my.hendisantika.bankingsample.repository.TransactionRepository;
+import id.my.hendisantika.bankingsample.util.CodeGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
