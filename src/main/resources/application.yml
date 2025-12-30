@@ -3,6 +3,11 @@ spring:
     name: banking-sample
   profiles:
     active: local
+  jpa:
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
 ---
 spring:
   config:
@@ -16,6 +21,6 @@ spring:
       path: /h2-console
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
 server:
   port: 8080

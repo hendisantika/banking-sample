@@ -1,6 +1,6 @@
-CREATE SCHEMA online_bank;
+CREATE SCHEMA IF NOT EXISTS online_bank;
 
-CREATE TABLE online_bank.account
+CREATE TABLE IF NOT EXISTS online_bank.account
 (
     id              bigint         NOT NULL PRIMARY KEY,
     sort_code       CHAR(8)        NOT NULL,
@@ -11,8 +11,8 @@ CREATE TABLE online_bank.account
     UNIQUE (sort_code, account_number)
 );
 
-CREATE SEQUENCE online_bank.transaction_sequence START WITH 5;
-CREATE TABLE online_bank.transaction
+CREATE SEQUENCE IF NOT EXISTS online_bank.transaction_sequence START WITH 5;
+CREATE TABLE IF NOT EXISTS online_bank.transaction
 (
     id                bigint         NOT NULL PRIMARY KEY,
     source_account_id bigint         NOT NULL REFERENCES online_bank.account (id),

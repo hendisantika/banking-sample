@@ -8,10 +8,9 @@ import id.my.hendisantika.bankingsample.util.AccountInput;
 import id.my.hendisantika.bankingsample.util.TransactionInput;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.util.Optional;
 
@@ -29,14 +28,14 @@ import static org.mockito.Mockito.when;
  * Time: 19.00
  * To change this template use File | Settings | File Templates.
  */
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 class TransactionServiceTest {
 
     @Autowired
     private TransactionService transactionService;
-    @MockBean
+    @MockitoBean
     private AccountRepository accountRepository;
-    @MockBean
+    @MockitoBean
     private TransactionRepository transactionRepository;
 
     @BeforeEach
@@ -90,14 +89,5 @@ class TransactionServiceTest {
         boolean isComplete = transactionService.makeTransfer(input);
 
         assertThat(isComplete).isFalse();
-    }
-
-    @TestConfiguration
-    static class TransactionServiceTestContextConfiguration {
-
-        @Bean
-        public TransactionService transactionService() {
-            return new TransactionService();
-        }
     }
 }

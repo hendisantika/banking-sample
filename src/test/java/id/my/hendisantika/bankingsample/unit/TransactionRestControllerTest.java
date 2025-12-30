@@ -1,12 +1,12 @@
 package id.my.hendisantika.bankingsample.unit;
 
-import id.my.hendisantika.bankingsample.controller.TransactionRestController;
 import id.my.hendisantika.bankingsample.service.TransactionService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -22,14 +22,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * Time: 18.59
  * To change this template use File | Settings | File Templates.
  */
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(TransactionRestController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class TransactionRestControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
+    @MockitoBean
     private TransactionService transactionService;
 
     @Test
